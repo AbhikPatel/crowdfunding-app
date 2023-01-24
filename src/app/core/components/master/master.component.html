@@ -1,1 +1,8 @@
-<p>master works!</p>
+<div class="wrapper d-flex flex-column h-100 user-select-none overflow-auto">
+    <div id="header">
+        <app-header></app-header>
+    </div>
+    <div id="content" class="flex-grow-1 container d-flex flex-column align-items-center">
+        <router-outlet></router-outlet>
+    </div>
+</div>

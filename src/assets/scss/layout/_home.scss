@@ -1,0 +1,55 @@
+.bookmark {
+    padding: 1rem 2rem 1rem 5rem;
+    
+    &-dot {
+        width: 55px;
+        height: 55px;
+    }
+
+    @media(max-width: $mobile-screen){
+        display: none;
+    }
+}
+
+.bookmark-off{
+    background-color: #e7e7e7;
+    color: gray;
+
+    &-dot {
+        background-color: grey;
+        color: #bbbbbb;
+    }
+}
+
+.bookmark-on{
+    background-color: lighten($primary, 45);
+    color: $primary;
+
+    &-dot {
+        background-color: $primary;
+        color: $white;
+    }
+}
+
+.media{
+    display: none;
+
+    @media(max-width: $mobile-screen){
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.status{
+    border-right: 1px solid #d1d1d1;
+    
+    @media (max-width: $tablet-screen){
+        border-right: none;
+        border-bottom: 1px solid #d1d1d1;
+    }
+}
+
+.home-container{
+    width: 800px;
+}

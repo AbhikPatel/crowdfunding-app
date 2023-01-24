@@ -2,3 +2,27 @@
 
 // font 
 $font-family                                                : 'Commissioner', sans-serif;
+
+// heading 
+$headings-font-weight                                       : 700;
+$headings-margin-bottom                                     : 0;
+
+// nav 
+$nav-link-font-weight                                       : 500;
+
+// media
+$mobile-screen                                              : 576px;
+$tablet-screen                                              : 768px;
+$laptop-screen                                              : 992px;
+$large-laptop-screen                                        : 1200px;
+$desktop-screen                                             : 1400px;
+
+// button 
+$btn-padding-x                                              : 3rem;
+$btn-padding-y                                              : 1rem;
+$btn-font-weight                                            : 600;
+
+// card 
+$card-spacer-y                                              : 2rem;                     
+$card-spacer-x                                              : 2rem;
+$card-border-radius                                         : 10px;

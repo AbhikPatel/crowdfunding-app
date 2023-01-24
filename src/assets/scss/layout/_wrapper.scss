@@ -1,0 +1,19 @@
+.wrapper {
+    background-image: url('../../images/image-hero-desktop.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #e7e7e7;
+    background-attachment: scroll;
+}
+
+#content{
+    margin-top: 15%;
+    
+    @media (max-width: $tablet-screen){
+        margin-top: 5%;
+    }
+}
+
+.home-container{
+    width:1000px;
+}

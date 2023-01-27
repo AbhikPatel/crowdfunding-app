@@ -1,0 +1,23 @@
+.donate-input {
+    border: none;
+    width: 50px;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+input {
+    caret-color: $primary;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}

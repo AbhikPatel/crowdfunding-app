@@ -1,1 +1,4 @@
-<app-home-presentation></app-home-presentation>
+<app-home-presentation
+    [pledgeDetails]="getPledgeDetails$ | async"
+    (emitOverlayData)="emitOverlayData($event)"
+></app-home-presentation>

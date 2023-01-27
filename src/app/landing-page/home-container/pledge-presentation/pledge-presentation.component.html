@@ -1,1 +1,45 @@
-<p>pledge-presentation works!</p>
+<div class="bg-white p-5 rounded-3 position-relative user-select-none overflow-auto" style="width: 800px;">
+    <h4 class="mb-3"> Back this Project </h4>
+    <!-- <span class="close-btn position-absolute fs-4 sub-title" role="button">🞮</span> -->
+    <p class="sub-title">
+        Want to support us in bringing MasterCraft Bamboo monitor Riser in the world?
+    </p>
+    <form [formGroup]="pledgeGroup">
+        <label [for]="data.label" class="mb-3" *ngFor="let data of pledgeForm"
+            [ngClass]="{'opacity-50' : data.left === 0}">
+            <div class="border rounded-3" role="button" [ngClass]="{'border-primary' : currentValue === data.label}">
+                <div class="p-4 d-flex">
+                    <div>
+                        <input type="radio" class="form-check-input n" [id]="data.label" name="pledgeType"
+                            formControlName="pledgeType" [value]="data.label">
+                    </div>
+                    <div class="ps-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="d-flex">
+                                <h6 [ngClass]="{'text-primary' : currentValue === data.label}"> {{data.title}} </h6>
+                                <h6 class="text-primary ps-3" [ngClass]="{'d-none' : data.id === 0}"> Pledge
+                                    ${{data.amount}} or more </h6>
+                            </div>
+                            <div class="d-flex align-items-center" [ngClass]="{'d-none' : data.id === 0}">
+                                <h6> {{data.left}} </h6>
+                                <span class="sub-title ps-1"> left </span>
+                            </div>
+                        </div>
+                        <p class="sub-title">{{data.content}}</p>
+                    </div>
+                </div>
+                <div class="border-top p-4 d-flex align-items-center justify-content-between"
+                    [ngClass]="(currentValue === data.label && data.id !== 0) ? 'd-block' : 'd-none' ">
+                    <div class="sub-title"> Enter your pledge </div>
+                    <div class="d-flex justify-content-end">
+                        <div class="d-flex border p-3 rounded-pill">
+                            <span class="sub-title pe-3"> $ </span>
+                            <input type="number" name="donate" id="donate" class="donate-input fw-bolder" formControlName="donate">
+                        </div>
+                        <button class="btn btn-primary text-white rounded-pill ms-3" type="submit" (click)="onDonate(data)"> Continue </button>
+                    </div>
+                </div>
+            </div>
+        </label>
+    </form>
+</div>

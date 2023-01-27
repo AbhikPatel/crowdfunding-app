@@ -1,48 +1,66 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { HomePresenterService } from '../home-presenter/home-presenter.service';
 
 @Component({
   selector: 'app-home-presentation',
-  templateUrl: './home-presentation.component.html'
+  templateUrl: './home-presentation.component.html',
+  viewProviders: [HomePresenterService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePresentationComponent implements OnInit {
 
-  public markText: string;
 
-  constructor() {
-    this.markText = 'Bookmark'
+  @Input() public set pledgeDetails(v: any[] | null) {
+    if (v) {
+      this._pledgeDetails = v;
+    }
+  }
+  public get pledgeDetails(): any[] | null {
+    return this._pledgeDetails;
   }
 
-  public pledgeDetails = [
-    {
-      id:1,
-      title:"Bamboo Stand",
-      amount:25,
-      content:`You get an ergonomic stand made of natural bamboo. You've helped us lauch our promotional
-      campaign, and you'll be added to a special Backer member list.`,
-      left:0
-    },
-    {
-      id:2,
-      title:"Black Edition Stand",
-      amount:75,
-      content:`You get a Black Special Edition computer stand and a personal thank you. You'll be added to our
-      Backer member list. Shipping is included.`,
-      left:100
-    },
-    {
-      id:3,
-      title:"Mahogany Special Stand",
-      amount:200,
-      content:`You get two Special Mahogany stands, a Backer T-shirt, and a personal thank you. You'll be added
-      to our Backer member list. Shipping is included.`,
-      left:100
-    }
-  ]
+  @Output() public emitOverlayData:EventEmitter<any>  
+
+  private _pledgeDetails: any[] | null;
+
+  public markText: string;
+  public currentDonation: number;
+  public currentBackers: number;
+  public progressBar: number;
+
+  constructor(
+    private _service: HomePresenterService,
+    private _cdr:ChangeDetectorRef
+  ) {
+    this.markText = 'Bookmark';
+    this._pledgeDetails = [];
+    this.currentDonation = 0;
+    this.currentBackers = 0;
+    this.progressBar = 0;
+    this.emitOverlayData = new EventEmitter();
+  }
 
   ngOnInit(): void {
+    this._service.overlayData$.subscribe((data) => {
+      this.updateProgress(data.donation);
+      delete data.donation
+      this.emitOverlayData.emit(data)
+    })
   }
 
   public onBookmark() {
     this.markText === 'Bookmark' ? this.markText = 'Bookmarked' : this.markText = 'Bookmark'
+  }
+
+  public onProject(data?: any) {
+    if (this.pledgeDetails)
+      this._service.openPledgeOverlay(this.pledgeDetails, data);
+  }
+
+  public updateProgress(donation:number) {
+    this.currentBackers++;
+    this.currentDonation += donation;
+    this.progressBar = (this.currentDonation / 100000) * 100;
+    this._cdr.markForCheck();
   }
 }
